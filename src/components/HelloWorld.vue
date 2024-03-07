@@ -1,6 +1,8 @@
 <script setup>
-import { reactive, ref, watch } from 'vue';
+import { reactive, ref, watch, watchEffect } from 'vue';
 const beet=ref(33);
+//immediate=>api(third argu)
+// watch([beet,beet1],(newVal,oldVal)=>{}
 watch(beet,(newVal,oldVal)=>{
 console.log(newVal,oldVal)
 if( newVal>oldVal && newVal>100){
@@ -11,15 +13,27 @@ if( newVal<oldVal && newVal<20){
 }
 })
 
+// watchEffect(()=>console.log(beet.value,"dgdg"))
 // reactive state
 // const heartBeet=reactive({beet:50})
 // watch(()=>{return {...heartBeet}},(newVal,oldVal)=>{
 //   console.log(newVal,oldVal)
 // })
+
+//directive custom
+const vFontSize={
+  mounted:(el,binding)=> {
+    console.log(binding.value);
+    el.style.fontSize="40px",
+    el.style.color="red"
+  },
+}
 </script>
 
 <template>
-
+<h1 v-font-size="80">custom dir</h1>
+<!-- <h1 v-font-size:default>custom dir</h1>=>pass argument  binding.arg -->
+<!-- <h1 v-font-size.default>custom dir</h1>=>pass modifatir  binding.modifiers -->
 <h1>Heart Beet {{  beet}}</h1>
 <h1 v-if="beet>40">Alive</h1>
 <h1 v-if="beet<39">Dead....</h1>

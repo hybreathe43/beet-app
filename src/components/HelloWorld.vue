@@ -1,5 +1,8 @@
 <script setup>
 import { reactive, ref, watch, watchEffect } from 'vue';
+import {useRoute} from "vue-router"
+const rou=useRoute();
+// console.log(rou.params.id)
 const beet=ref(33);
 //immediate=>api(third argu)
 // watch([beet,beet1],(newVal,oldVal)=>{}
@@ -31,6 +34,7 @@ const vFontSize={
 </script>
 
 <template>
+  <h1>{{ rou.params.id }}</h1>
 <h1 v-font-size="80">custom dir</h1>
 <!-- <h1 v-font-size:default>custom dir</h1>=>pass argument  binding.arg -->
 <!-- <h1 v-font-size.default>custom dir</h1>=>pass modifatir  binding.modifiers -->

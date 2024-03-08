@@ -4,7 +4,7 @@ import User from "./components/User.vue";
 import Dynamic1 from "./components/Dynamic1.vue";
 import Dynamic2 from "./components/Dynamic2.vue";
 import imgSrc from "./assets/logo.svg";
-import { RouterView,RouterLink } from "vue-router";
+import { RouterView,RouterLink, useRouter } from "vue-router";
 import {getSingleUser,postUser,updateUser} from "./components/composable/fetchApi";
 const url=ref("https://reqres.in/api/users/");
 const uid=ref(1);
@@ -32,17 +32,23 @@ const tabs ={
 }
 const img =ref("./assets/logo.svg");
 // const url=ref("https://google.com");
+const router =useRouter();
+
 </script>
 
 <template>
   <div>
 <RouterLink :to="{name:'da1'}">1</RouterLink>
 <!-- <RouterLink to="/dy1">1</RouterLink> -->
-<RouterLink :to="{name:'da2'}">2</RouterLink>
+<!-- <RouterLink :to="{name:'da2'}">2</RouterLink> -->
+<!-- <button @click="router.push('/dy2')">2</button> -->
+<button @click="router.push({path:'/dy2'})">2</button>
+<!-- <button @click="router.push({path:'/dy2',query:{tag:'saj'}})">2</button> -->
 <!-- <RouterLink to="/dy2">2</RouterLink> -->
 
   </div>
   <RouterView/>
+  <RouterView name="sidebar"/>
   <!-- <h1>{{ userData.id }}</h1>
   <h1>{{ userData.email }}</h1>
   <a :href="userData.avatar">sasas</a>

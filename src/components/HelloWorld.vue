@@ -1,9 +1,12 @@
 <script setup>
 import { reactive, ref, watch, watchEffect } from 'vue';
-import {useRoute} from "vue-router"
+import {useRoute,useRouter} from "vue-router"
 const rou=useRoute();
+const router=useRouter();
 // console.log(rou.params.id)
 const beet=ref(33);
+// props form route
+const props=defineProps(["id","catName"])
 //immediate=>api(third argu)
 // watch([beet,beet1],(newVal,oldVal)=>{}
 watch(beet,(newVal,oldVal)=>{
@@ -31,10 +34,15 @@ const vFontSize={
     el.style.color="red"
   },
 }
+const backPage = () => {
+  router.back();
+};
 </script>
 
 <template>
+  <h1>{{ props }}</h1>
   <h1>{{ rou.params.id }}</h1>
+  <button @click="backPage">Back</button>
 <h1 v-font-size="80">custom dir</h1>
 <!-- <h1 v-font-size:default>custom dir</h1>=>pass argument  binding.arg -->
 <!-- <h1 v-font-size.default>custom dir</h1>=>pass modifatir  binding.modifiers -->
